@@ -1,14 +1,14 @@
-import express, {Router, Request, Response} from 'express';
+import express, {Express, Router, Request, Response} from 'express';
 import bodyParser from 'body-parser';
 import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
 (async () => {
 
   // Init the Express application
-  const app = express();
+  const app: Express = express();
 
   // Set the network port
-  const port = process.env.PORT || 8082;
+  const port: any = process.env.PORT || 8082;
   
   // Use the body parser middleware for post requests
   app.use(bodyParser.json());
@@ -27,8 +27,8 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
       return res.status(400).send("URL parameter required");
     } else {
       try {
-        let validation = new URL(stringUrl);
-        const imagePath = await filterImageFromURL(stringUrl);
+        let validation: URL = new URL(stringUrl);
+        const imagePath: string = await filterImageFromURL(stringUrl);
 
         res.sendFile(imagePath, err => {
           if (err) {
